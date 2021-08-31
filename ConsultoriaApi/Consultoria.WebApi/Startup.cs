@@ -1,4 +1,7 @@
 using Consultoria.Data.Context;
+using Consultoria.Data.Repository;
+using Consultoria.Manager.Implemantation;
+using Consultoria.Manager.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +34,10 @@ namespace Consultoria.WebApi
             services.AddControllers();
 
             services.AddDbContext<ConsultoriaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConsultoriaConnection")));
-            
+
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IClienteManager, ClienteManager>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Consultoria Api", Version = "v1" });

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Consultoria.Core\Consultoria.Core.csproj" />
+    <ProjectReference Include="..\Consultoria.Manager\Consultoria.Manager.csproj" />
   </ItemGroup>
 
 </Project>

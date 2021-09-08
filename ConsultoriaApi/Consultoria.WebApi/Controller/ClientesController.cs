@@ -25,7 +25,7 @@ namespace Consultoria.WebApi.Controller
         public async Task<IActionResult> Get()
         {
             return Ok(await clienteManager.GetClientesAsync());
-           
+
         }
 
         // GET api/<ClientesController>/5
@@ -37,20 +37,30 @@ namespace Consultoria.WebApi.Controller
 
         // POST api/<ClientesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(Cliente cliente)
         {
+            var clienteInserido = await clienteManager.InsertClienteAsync(cliente);
+            return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
         }
 
         // PUT api/<ClientesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Cliente cliente)
         {
+            var clienteAtualizado = await clienteManager.UpdateClienteAsync(cliente);
+            if (clienteAtualizado == null)
+            {
+                return NotFound();
+            }
+            return Ok(clienteAtualizado);
         }
 
         // DELETE api/<ClientesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await clienteManager.DeleteClienteAsync(id);
+            return NoContent();
         }
     }
 }

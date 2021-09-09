@@ -1,5 +1,6 @@
 ﻿using Consultoria.Core.Domain;
 using Consultoria.Manager.Interfaces;
+using Consultoria.Manager.Validator;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace Consultoria.WebApi.Controller
         [HttpPost]
         public async Task<IActionResult> Post(Cliente cliente)
         {
+
             var clienteInserido = await clienteManager.InsertClienteAsync(cliente);
             return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
         }

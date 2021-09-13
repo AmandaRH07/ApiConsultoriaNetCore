@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Consultoria.Core.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Consultoria.Core.Shared.ModelViews.NovoCliente">
+            <summary>
+             Objeto utilizado para a inserção de um novo cliente.
+            </summary>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Nome">
+            <summary>
+            Nome do cliente
+            </summary>
+            <example>João Silva</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.DataNascimento">
+            <example>1980-01-01</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Sexo">
+            <example>F ou M</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Telefone">
+            <example>000000000</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Documento">
+            <summary>
+            Documento do cliente: CPF, CNF,...
+            </summary>
+            <example>12345678</example>
+        </member>
+    </members>
+</doc>

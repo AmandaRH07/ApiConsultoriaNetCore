@@ -8,7 +8,10 @@ namespace Consultoria.Manager.Validator
     {
         public AlteraClienteValidator()
         {
-            RuleFor(p => p.Id).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(p => p.Id)
+                .NotNull()
+                .NotEmpty()
+                .GreaterThan(0);
             Include(new NovoClienteValidator());
         }
 

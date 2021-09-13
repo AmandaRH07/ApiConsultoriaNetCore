@@ -1,4 +1,5 @@
 ﻿using Consultoria.Core.Domain;
+using Consultoria.Core.Shared.ModelViews;
 using Consultoria.Manager.Interfaces;
 using Consultoria.Manager.Validator;
 using Microsoft.AspNetCore.Mvc;
@@ -38,16 +39,16 @@ namespace Consultoria.WebApi.Controller
 
         // POST api/<ClientesController>
         [HttpPost]
-        public async Task<IActionResult> Post(Cliente cliente)
+        public async Task<IActionResult> Post(NovoCliente novoCliente)
         {
 
-            var clienteInserido = await clienteManager.InsertClienteAsync(cliente);
-            return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
+            var clienteInserido = await clienteManager.InsertClienteAsync(novoCliente);
+            return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
         }
 
         // PUT api/<ClientesController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Cliente cliente)
+        public async Task<IActionResult> Put(AlteraCliente cliente)
         {
             var clienteAtualizado = await clienteManager.UpdateClienteAsync(cliente);
             if (clienteAtualizado == null)

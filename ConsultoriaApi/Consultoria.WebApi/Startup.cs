@@ -2,6 +2,7 @@ using Consultoria.Data.Context;
 using Consultoria.Data.Repository;
 using Consultoria.Manager.Implemantation;
 using Consultoria.Manager.Interfaces;
+using Consultoria.Manager.Mappings;
 using Consultoria.Manager.Validator;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -26,8 +27,13 @@ namespace Consultoria.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddFluentValidation(p => p.RegisterValidatorsFromAssemblyContaining<ClienteValidator>());
+                .AddFluentValidation(p =>
+                {
+                    p.RegisterValidatorsFromAssemblyContaining<NovoClienteValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<AlteraClienteValidator>();
+                });
 
+            services.AddAutoMapper(typeof(NovoClienteMappingProfile), typeof(AlteraClienteMappingProfile));
             services.AddDbContext<ConsultoriaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConsultoriaConnection")));
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -39,7 +45,6 @@ namespace Consultoria.WebApi
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

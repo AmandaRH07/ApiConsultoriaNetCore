@@ -4,9 +4,9 @@ using System;
 
 namespace Consultoria.Manager.Validator
 {
-    public class ClienteValidator : AbstractValidator<Cliente>
+    public class NovoClienteValidator : AbstractValidator<Cliente>
     {
-        public ClienteValidator()
+        public NovoClienteValidator()
         {
             RuleFor(x => x.Nome).NotNull().NotEmpty().MinimumLength(10).MaximumLength(150);
             RuleFor(x => x.DataNascimento).NotNull().NotEmpty().LessThan(DateTime.Now).GreaterThan(DateTime.Now.AddYears(-130));

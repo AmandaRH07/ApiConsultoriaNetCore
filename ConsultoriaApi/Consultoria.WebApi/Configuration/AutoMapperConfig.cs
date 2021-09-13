@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Consultoria.Manager.Mappings;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Consultoria.WebApi.Configuration
 {
-    public class AutoMapperConfig
+    public static class AutoMapperConfig
     {
+        public static void AddAutoMapperConfiguration(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(NovoClienteMappingProfile), typeof(AlteraClienteMappingProfile));
+        }
     }
 }

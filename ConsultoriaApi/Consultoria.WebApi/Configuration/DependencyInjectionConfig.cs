@@ -7,7 +7,7 @@ namespace Consultoria.WebApi.Configuration
 {
     public static class DependencyInjectionConfig
     {
-        public static void UseDependencyInjectionConfiguration(this IServiceCollection services)
+        public static void AddDependencyInjectionConfiguration(this IServiceCollection services)
         {
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteManager, ClienteManager>();

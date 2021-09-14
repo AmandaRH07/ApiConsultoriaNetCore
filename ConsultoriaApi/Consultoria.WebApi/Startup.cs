@@ -26,7 +26,7 @@ namespace Consultoria.WebApi
 
             services.AddAutoMapperConfiguration();
 
-            services.AddDbContext<ConsultoriaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConsultoriaConnection")));
+            services.AddDatabaseConfiguration(Configuration);
 
             services.AddDependencyInjectionConfiguration();
 
@@ -40,6 +40,7 @@ namespace Consultoria.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.USeDatabaseConfiguration();
             app.UseSwaggerConfiguration();
             
             app.UseHttpsRedirection();

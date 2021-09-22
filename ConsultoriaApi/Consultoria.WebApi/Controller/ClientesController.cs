@@ -1,14 +1,11 @@
 ﻿using Consultoria.Core.Domain;
 using Consultoria.Core.Shared.ModelViews;
 using Consultoria.Manager.Interfaces;
-using Consultoria.Manager.Validator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SerilogTimings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -66,14 +63,17 @@ namespace Consultoria.WebApi.Controller
         public async Task<IActionResult> Post(NovoCliente novoCliente)
         {
             logger.LogInformation("Objeto recebido {@novoClienet}", novoCliente);
+
             Cliente clienteInserido;
+
             using(Operation.Time("Tempo de adição de um novo cliente"))
             {
                 logger.LogInformation("Foi requisitada a inserção de um novo cliente");
                 clienteInserido = await clienteManager.InsertClienteAsync(novoCliente);
-
             }
+
             return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
+            logger.LogInformation("Fim da requisição");
         }
 
         /// <summary>

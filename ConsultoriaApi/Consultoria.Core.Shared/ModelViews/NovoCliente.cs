@@ -20,13 +20,12 @@ namespace Consultoria.Core.Shared.ModelViews
         public DateTime DataNascimento { get; set; }
         /// <example>F ou M</example>
         public char Sexo { get; set; }
-        /// <example>000000000</example>
-        public string Telefone { get; set; }
         /// <summary>
         /// Documento do cliente: CPF, CNF,...
         /// </summary>
         /// <example>12345678</example>
         public string Documento { get; set; }
         public NovoEndereco Endereco { get; set; }
+        public ICollection<NovoTelefone> Telefones { get; set; }
     }
 }

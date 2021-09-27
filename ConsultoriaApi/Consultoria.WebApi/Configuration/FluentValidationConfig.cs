@@ -16,6 +16,7 @@ namespace Consultoria.WebApi.Configuration
                     p.RegisterValidatorsFromAssemblyContaining<NovoClienteValidator>();
                     p.RegisterValidatorsFromAssemblyContaining<AlteraClienteValidator>();
                     p.RegisterValidatorsFromAssemblyContaining<NovoEnderecoValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<NovoTelefoneValidator>();
                 });
         }
     }

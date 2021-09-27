@@ -20,6 +20,7 @@ namespace Consultoria.Data.Repository
         {
             return await context.Clientes
                 .Include(p => p.Endereco)
+                .Include(p => p.Telefones)
                 .AsNoTracking().ToListAsync();
         }
 
@@ -27,10 +28,10 @@ namespace Consultoria.Data.Repository
         {
             return await context.Clientes
                 .Include(p => p.Endereco)
+                .Include(p => p.Telefones)
                 .SingleOrDefaultAsync(p => p.Id == id);
         }
 
-        // Insert
         public async Task<Cliente> InsertClienteAsync(Cliente cliente)
         {
             await context.Clientes.AddAsync(cliente);
@@ -38,19 +39,14 @@ namespace Consultoria.Data.Repository
             return cliente;
         }
 
-        //Update 
         public async Task<Cliente> UpdateClienteAsync(Cliente cliente)
         {
             var clienteConsultado = await context.Clientes.FindAsync(cliente.Id);
 
             if (clienteConsultado == null)
             {
-                //retorna null, que vai ser tratada na controller
                 return null;
             }
-
-            //clienteConsultado.Nome = cliente.Nome;
-            //clienteConsultado.DataNascimento = cliente.DataNascimento;
 
             context.Entry(clienteConsultado).CurrentValues.SetValues(cliente);
 
@@ -59,7 +55,6 @@ namespace Consultoria.Data.Repository
             return clienteConsultado;
         }
 
-        //Delete
         public async Task DeleteClienteAsync(int id)
         {
             var clienteConsultado = await context.Clientes.FindAsync(id);

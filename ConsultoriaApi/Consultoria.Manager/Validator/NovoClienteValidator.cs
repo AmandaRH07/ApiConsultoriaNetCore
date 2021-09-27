@@ -23,11 +23,9 @@ namespace Consultoria.Manager.Validator
                 .NotEmpty()
                 .MinimumLength(4)
                 .MaximumLength(14);
-            RuleFor(x => x.Telefone)
+            RuleFor(x => x.Telefones)
                 .NotNull()
-                .NotEmpty()
-                .Matches("[2-9][0-9]{10}")
-                .WithMessage("O telefone tem que ter o formato [2-9][0-9]{10}");
+                .NotEmpty();                
             RuleFor(x => x.Sexo)
                 .NotNull()
                 .NotEmpty()

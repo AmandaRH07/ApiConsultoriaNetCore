@@ -21,9 +21,6 @@
         <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Sexo">
             <example>F ou M</example>
         </member>
-        <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Telefone">
-            <example>000000000</example>
-        </member>
         <member name="P:Consultoria.Core.Shared.ModelViews.NovoCliente.Documento">
             <summary>
             Documento do cliente: CPF, CNF,...
@@ -47,6 +44,9 @@
         </member>
         <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Complemento">
             <example>Apto. 1</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoTelefone.Numero">
+            <example>000000000</example>
         </member>
     </members>
 </doc>

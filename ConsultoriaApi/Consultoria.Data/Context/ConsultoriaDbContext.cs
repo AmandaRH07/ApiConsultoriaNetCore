@@ -1,4 +1,5 @@
 ﻿using Consultoria.Core.Domain;
+using Consultoria.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,13 @@ namespace Consultoria.Data.Context
         public ConsultoriaDbContext(DbContextOptions options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
         }
     }
 }

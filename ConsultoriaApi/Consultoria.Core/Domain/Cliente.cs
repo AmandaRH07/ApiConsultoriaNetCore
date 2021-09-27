@@ -12,7 +12,5 @@ namespace Consultoria.Core.Domain
         public string Documento { get; set; }
         public DateTime Criacao { get; set; }
         public DateTime? UltimaAtualizacao{ get; set; }
-
-       
     }
 }

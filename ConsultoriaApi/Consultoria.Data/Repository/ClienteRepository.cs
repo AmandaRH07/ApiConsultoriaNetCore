@@ -2,18 +2,13 @@
 using Consultoria.Data.Context;
 using Consultoria.Manager.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Consultoria.Data.Repository
 {
-
     public class ClienteRepository : IClienteRepository
     {
-
         private readonly ConsultoriaDbContext context;
 
         public ClienteRepository(ConsultoriaDbContext context)
@@ -23,12 +18,16 @@ namespace Consultoria.Data.Repository
 
         public async Task<IEnumerable<Cliente>> GetClientesAsync()
         {
-            return await context.Clientes.AsNoTracking().ToListAsync();
+            return await context.Clientes
+                .Include(p => p.Endereco)
+                .AsNoTracking().ToListAsync();
         }
 
         public async Task<Cliente> GetClienteAsync(int id)
         {
-            return await context.Clientes.FindAsync(id);
+            return await context.Clientes
+                .Include(p => p.Endereco)
+                .SingleOrDefaultAsync(p => p.Id == id);
         }
 
         // Insert
@@ -44,7 +43,7 @@ namespace Consultoria.Data.Repository
         {
             var clienteConsultado = await context.Clientes.FindAsync(cliente.Id);
 
-            if(clienteConsultado == null)
+            if (clienteConsultado == null)
             {
                 //retorna null, que vai ser tratada na controller
                 return null;
@@ -61,7 +60,6 @@ namespace Consultoria.Data.Repository
         }
 
         //Delete
-
         public async Task DeleteClienteAsync(int id)
         {
             var clienteConsultado = await context.Clientes.FindAsync(id);

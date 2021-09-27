@@ -1,9 +1,6 @@
 ﻿using Consultoria.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Consultoria.Data.Configuration
 {
@@ -22,7 +19,6 @@ namespace Consultoria.Data.Configuration
                 p.Sexo 
             });
             builder.Property(p => p.DataNascimento).HasColumnType("varchar");
-
         }
     }
 }

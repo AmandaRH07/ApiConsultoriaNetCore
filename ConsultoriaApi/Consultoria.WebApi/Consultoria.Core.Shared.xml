@@ -30,5 +30,23 @@
             </summary>
             <example>12345678</example>
         </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.CEP">
+            <example>00000000</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Estado">
+            <example>SP</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Cidade">
+            <example>São Paulo</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Logradouro">
+            <example>Rua X</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Numero">
+            <example>100</example>
+        </member>
+        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Complemento">
+            <example>Apto. 1</example>
+        </member>
     </members>
 </doc>

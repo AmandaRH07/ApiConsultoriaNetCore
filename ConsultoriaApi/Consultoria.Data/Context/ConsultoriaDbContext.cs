@@ -10,6 +10,7 @@ namespace Consultoria.Data.Context
     public class ConsultoriaDbContext : DbContext
     {
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
 
         public ConsultoriaDbContext(DbContextOptions options) : base(options)
         {
@@ -21,6 +22,7 @@ namespace Consultoria.Data.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
         }
     }
 }

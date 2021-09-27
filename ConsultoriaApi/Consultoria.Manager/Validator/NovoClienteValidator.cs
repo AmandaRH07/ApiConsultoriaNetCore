@@ -1,5 +1,4 @@
-﻿using Consultoria.Core.Domain;
-using Consultoria.Core.Shared.ModelViews;
+﻿using Consultoria.Core.Shared.ModelViews;
 using FluentValidation;
 using System;
 
@@ -34,6 +33,7 @@ namespace Consultoria.Manager.Validator
                 .NotEmpty()
                 .Must(IsMorF)
                 .WithMessage("Sexo precisa ser M ou F");
+            RuleFor(x => x.Endereco).SetValidator(new NovoEnderecoValidator());
         }
 
         private bool IsMorF(char sexo)

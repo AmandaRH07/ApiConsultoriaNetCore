@@ -8,7 +8,6 @@ using SerilogTimings;
 using System;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Consultoria.WebApi.Controller
 {
@@ -31,12 +30,11 @@ namespace Consultoria.WebApi.Controller
         ///  Retorna todos os clientes cadastrados na base
         /// </summary>
         [HttpGet]
-        // Tratamento de erros
         [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
-            throw new Exception("Erro de teste");
+            //throw new Exception("Erro de teste");
             return Ok(await clienteManager.GetClientesAsync());
         }
 

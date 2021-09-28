@@ -12,6 +12,8 @@ namespace Consultoria.Data.Context
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Especialidade> Especialidades { get; set; }
 
         public ConsultoriaDbContext(DbContextOptions options) : base(options)
         {

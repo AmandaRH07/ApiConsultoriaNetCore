@@ -2,18 +2,13 @@
 using Consultoria.Data.Context;
 using Consultoria.Manager.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Consultoria.Data.Repository
 {
-
     public class ClienteRepository : IClienteRepository
     {
-
         private readonly ConsultoriaDbContext context;
 
         public ClienteRepository(ConsultoriaDbContext context)
@@ -23,15 +18,20 @@ namespace Consultoria.Data.Repository
 
         public async Task<IEnumerable<Cliente>> GetClientesAsync()
         {
-            return await context.Clientes.AsNoTracking().ToListAsync();
+            return await context.Clientes
+                .Include(p => p.Endereco)
+                .Include(p => p.Telefones)
+                .AsNoTracking().ToListAsync();
         }
 
         public async Task<Cliente> GetClienteAsync(int id)
         {
-            return await context.Clientes.FindAsync(id);
+            return await context.Clientes
+                .Include(p => p.Endereco)
+                .Include(p => p.Telefones)
+                .SingleOrDefaultAsync(p => p.Id == id);
         }
 
-        // Insert
         public async Task<Cliente> InsertClienteAsync(Cliente cliente)
         {
             await context.Clientes.AddAsync(cliente);
@@ -39,19 +39,14 @@ namespace Consultoria.Data.Repository
             return cliente;
         }
 
-        //Update 
         public async Task<Cliente> UpdateClienteAsync(Cliente cliente)
         {
             var clienteConsultado = await context.Clientes.FindAsync(cliente.Id);
 
-            if(clienteConsultado == null)
+            if (clienteConsultado == null)
             {
-                //retorna null, que vai ser tratada na controller
                 return null;
             }
-
-            //clienteConsultado.Nome = cliente.Nome;
-            //clienteConsultado.DataNascimento = cliente.DataNascimento;
 
             context.Entry(clienteConsultado).CurrentValues.SetValues(cliente);
 
@@ -59,8 +54,6 @@ namespace Consultoria.Data.Repository
             await context.SaveChangesAsync();
             return clienteConsultado;
         }
-
-        //Delete
 
         public async Task DeleteClienteAsync(int id)
         {

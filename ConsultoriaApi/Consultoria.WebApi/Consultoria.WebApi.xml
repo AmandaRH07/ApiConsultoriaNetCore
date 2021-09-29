@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Consultoria.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Consultoria.WebApi.Controller.ClientesController.Get">
+            <summary>
+             Retorna todos os clientes cadastrados na base
+            </summary>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.ClientesController.Get(System.Int32)">
+            <summary>
+            Retorna cliente consultado  pelo id
+            </summary>
+            <param name="id" example="123">Id do cliente</param>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.ClientesController.Post(Consultoria.Core.Shared.ModelViews.NovoCliente)">
+            <summary>
+            Insere novo cliente
+            </summary>
+            <param name="novoCliente"></param>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.ClientesController.Put(Consultoria.Core.Shared.ModelViews.AlteraCliente)">
+            <summary>
+            Altera um cliente
+            </summary>
+            <param name="cliente"></param>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.ClientesController.Delete(System.Int32)">
+            <summary>
+            Exclui um cliente
+            </summary>
+            <param name="id" example="123"></param>
+            <remarks>Ao excluir um cliente, o mesmo será excluido permanentemente da base</remarks>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.MedicosController.Get">
+            <summary>
+            Retorna todos os médicos.
+            </summary>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.MedicosController.Get(System.Int32)">
+            <summary>
+            Retorna um médico consultado via ID
+            </summary>
+            <param name="id" example="123">Id do médico</param>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.MedicosController.Post(Consultoria.Core.Shared.ModelViews.NovoMedico)">
+            <summary>
+            Insere um novo médico.
+            </summary>
+            <param name="medico"></param>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.MedicosController.Put(Consultoria.Core.Shared.ModelViews.AlteraMedico)">
+            <summary>
+            Altera um médico
+            </summary>
+        </member>
+        <member name="M:Consultoria.WebApi.Controller.MedicosController.DeleteAsync(System.Int32)">
+            <summary>
+            Exclui um médico.
+            </summary>
+            <param name="id" example="123">Id do médico</param>
+        </member>
+    </members>
+</doc>

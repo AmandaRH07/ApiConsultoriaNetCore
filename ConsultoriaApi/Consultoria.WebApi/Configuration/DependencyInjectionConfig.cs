@@ -13,6 +13,7 @@ namespace Consultoria.WebApi.Configuration
             services.AddScoped<IClienteManager, ClienteManager>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IMedicoManager, MedicoManager>();
+            services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Consultoria.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Consultoria.Data.Configuration
 {
@@ -9,6 +10,9 @@ namespace Consultoria.Data.Configuration
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {
             builder.HasKey(p => p.ClienteId);
+            builder.Property(p => p.Estado).HasConversion(
+              p => p.ToString(),
+              p => (Estado)Enum.Parse(typeof(Estado), p));
         }
     }
 }

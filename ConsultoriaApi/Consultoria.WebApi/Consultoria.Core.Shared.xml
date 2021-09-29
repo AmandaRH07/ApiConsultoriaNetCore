@@ -30,9 +30,6 @@
         <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.CEP">
             <example>00000000</example>
         </member>
-        <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Estado">
-            <example>SP</example>
-        </member>
         <member name="P:Consultoria.Core.Shared.ModelViews.NovoEndereco.Cidade">
             <example>São Paulo</example>
         </member>

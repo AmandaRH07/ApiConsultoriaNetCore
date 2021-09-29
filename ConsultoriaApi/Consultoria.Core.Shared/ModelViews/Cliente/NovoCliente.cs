@@ -19,7 +19,7 @@ namespace Consultoria.Core.Shared.ModelViews
         /// <example>1980-01-01</example>
         public DateTime DataNascimento { get; set; }
         /// <example>F ou M</example>
-        public char Sexo { get; set; }
+        public SexoView Sexo { get; set; }
         /// <summary>
         /// Documento do cliente: CPF, CNF,...
         /// </summary>

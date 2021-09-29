@@ -1,6 +1,7 @@
 ﻿using Consultoria.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Consultoria.Data.Configuration
 {
@@ -8,17 +9,10 @@ namespace Consultoria.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
-            builder.HasKey(p => p.Id);
-            builder.ToTable("TbCliente");
             builder.Property(p => p.Nome).HasMaxLength(200).IsRequired();
-            builder.Property(p => p.Sexo).HasDefaultValue('F').IsRequired();
-            builder.Property(p => p.Documento).HasColumnName("DocumentoIdentificador");
-
-            builder.HasIndex(p => new { 
-                p.Nome, 
-                p.Sexo 
-            });
-            builder.Property(p => p.DataNascimento).HasColumnType("varchar");
+            builder.Property(p => p.Sexo).HasConversion(
+                p => p.ToString(),
+                p => (Sexo)Enum.Parse(typeof(Sexo), p));
         }
     }
 }

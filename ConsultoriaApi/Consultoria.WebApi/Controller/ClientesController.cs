@@ -1,11 +1,13 @@
 ﻿using Consultoria.Core.Domain;
 using Consultoria.Core.Shared.ModelViews;
+using Consultoria.Core.Shared.ModelViews.Cliente;
 using Consultoria.Manager.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SerilogTimings;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -30,12 +32,17 @@ namespace Consultoria.WebApi.Controller
         ///  Retorna todos os clientes cadastrados na base
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
-            //throw new Exception("Erro de teste");
-            return Ok(await clienteManager.GetClientesAsync());
+            var clientes = await clienteManager.GetClientesAsync();
+            if (clientes.Any())
+            {
+                return Ok(clientes);
+            }
+            return NotFound();
         }
 
         /// <summary>
@@ -43,12 +50,17 @@ namespace Consultoria.WebApi.Controller
         /// </summary>
         /// <param name="id" example="123">Id do cliente</param>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await clienteManager.GetClienteAsync(id));
+            var cliente = await clienteManager.GetClienteAsync(id);
+            if (cliente.Id == 0)
+            {
+                return NotFound();
+            }
+            return Ok(cliente);
         }
 
         /// <summary>
@@ -56,22 +68,20 @@ namespace Consultoria.WebApi.Controller
         /// </summary>
         /// <param name="novoCliente"></param>
         [HttpPost]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post(NovoCliente novoCliente)
         {
-            logger.LogInformation("Objeto recebido {@novoClienet}", novoCliente);
+            logger.LogInformation("Objeto recebido {@novoCliente}", novoCliente);
 
-            Cliente clienteInserido;
-
-            using(Operation.Time("Tempo de adição de um novo cliente"))
+            ClienteView clienteInserido;
+            using (Operation.Time("Tempo de adição de um novo cliente."))
             {
-                logger.LogInformation("Foi requisitada a inserção de um novo cliente");
+                logger.LogInformation("Foi requisitada a inserção de um novo cliente.");
                 clienteInserido = await clienteManager.InsertClienteAsync(novoCliente);
             }
-
             return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
-            logger.LogInformation("Fim da requisição");
         }
 
         /// <summary>
@@ -79,7 +89,7 @@ namespace Consultoria.WebApi.Controller
         /// </summary>
         /// <param name="cliente"></param>
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(AlteraCliente cliente)
         {
@@ -97,13 +107,17 @@ namespace Consultoria.WebApi.Controller
         /// <param name="id" example="123"></param>
         /// <remarks>Ao excluir um cliente, o mesmo será excluido permanentemente da base</remarks>
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(Cliente), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ClienteView), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
 
         public async Task<IActionResult> Delete(int id)
         {
-            await clienteManager.DeleteClienteAsync(id);
+            var clienteExcliudo = await clienteManager.DeleteClienteAsync(id);
+            if (clienteExcliudo == null)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

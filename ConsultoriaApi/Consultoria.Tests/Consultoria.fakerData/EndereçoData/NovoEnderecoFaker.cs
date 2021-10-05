@@ -2,8 +2,6 @@
 using Consultoria.Core.Shared.ModelViews;
 using Consultoria.Core.Shared.ModelViews.Cliente;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Consultoria.FakerData.EndereçoData
 {

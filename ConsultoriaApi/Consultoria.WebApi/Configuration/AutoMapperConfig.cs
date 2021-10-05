@@ -8,9 +8,11 @@ namespace Consultoria.WebApi.Configuration
         public static void AddAutoMapperConfiguration(this IServiceCollection services)
         {
             services.AddAutoMapper(
-                typeof(NovoClienteMappingProfile), 
+                typeof(NovoClienteMappingProfile),
                 typeof(AlteraClienteMappingProfile),
-                typeof(NovoMedicoMappingProfile));
+                typeof(NovoMedicoMappingProfile),
+                typeof(NovoMedicoMappingProfile)
+            );
         }
     }
 }

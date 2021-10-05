@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Consultoria.Core.Domain;
 using Consultoria.Core.Shared.ModelViews;
+using Consultoria.Core.Shared.ModelViews.Especialidade;
 
 namespace Consultoria.Manager.Mappings
 {
@@ -12,6 +13,7 @@ namespace Consultoria.Manager.Mappings
             CreateMap<Medico, MedicoView>();
             CreateMap<Especialidade, ReferenciaEspecialidade>().ReverseMap();
             CreateMap<Especialidade, EspecialidadeView>().ReverseMap();
+            CreateMap<Especialidade, NovaEspecialidade>().ReverseMap();
             CreateMap<AlteraMedico, Medico>().ReverseMap();
         }
     }

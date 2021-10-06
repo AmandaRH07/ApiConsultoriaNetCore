@@ -31,11 +31,11 @@ namespace Consultoria.Data.Services
             claims.AddRange(usuario.Funcoes.Select(p => new Claim(ClaimTypes.Role, p.Descricao)));
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject =  new ClaimsIdentity(claims),
-                Audience = configuration.GetSection("JWT:Secret").Value,
-                Issuer = configuration.GetSection("JWT:Secret").Value,
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration.GetSection("JWT:Secret").Value)),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(chave), SecurityAlgorithms.HmacSha256)
+                Subject = new ClaimsIdentity(claims),
+                Audience = configuration.GetSection("JWT:Audience").Value,
+                Issuer = configuration.GetSection("JWT:Issuer").Value,
+                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration.GetSection("JWT:ExpiraEmMinutos").Value)),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(chave), SecurityAlgorithms.HmacSha512Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

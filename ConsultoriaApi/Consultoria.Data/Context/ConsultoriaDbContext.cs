@@ -1,9 +1,6 @@
 ﻿using Consultoria.Core.Domain;
 using Consultoria.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Consultoria.Data.Context
 {
@@ -15,6 +12,7 @@ namespace Consultoria.Data.Context
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Funcao> Funcoes { get; set; }
 
         public ConsultoriaDbContext(DbContextOptions options) : base(options) { }
 

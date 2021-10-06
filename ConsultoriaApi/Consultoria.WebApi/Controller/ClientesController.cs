@@ -70,8 +70,8 @@ namespace Consultoria.WebApi.Controller
                 clienteInserido = await clienteManager.InsertClienteAsync(novoCliente);
             }
 
-            return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
             logger.LogInformation("Fim da requisição");
+            return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
         }
 
         /// <summary>

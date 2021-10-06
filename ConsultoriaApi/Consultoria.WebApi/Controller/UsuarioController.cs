@@ -1,9 +1,8 @@
 ﻿using Consultoria.Core.Domain;
+using Consultoria.Core.Shared.ModelViews.Usuario;
 using Consultoria.Manager.Interfaces.Manager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Consultoria.WebApi.Controller
@@ -20,27 +19,30 @@ namespace Consultoria.WebApi.Controller
         }
 
         [HttpGet]
-        [Route("ValidaUsuario")]
-        public async Task<IActionResult> ValidaUsuario([FromBody] Usuario usuario)
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] Usuario usuario)
         {
-            var valido = await manager.ValidaSenhaAsync(usuario);
-            if (valido)
-                return Ok();
+            var usuarioLogado = await manager.ValidaUsuarioEGeraTokenAsync(usuario);
+            if (usuarioLogado != null)
+                return Ok(usuarioLogado);
 
             return Unauthorized();
         }
 
-        [HttpGet("{login}")]
-        public string Get(string login)
+        [Authorize(Roles = "Presidente, Lider")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return "value";
+            string login = User.Identity.Name;
+            var usuario = await manager.GetAsync(login);
+            return Ok(usuario);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Usuario usuario)
+        public async Task<IActionResult> Post(NovoUsuario novoUsuario)
         {
-            var usuarioInserido = await manager.InsertAsync(usuario);
-            return CreatedAtAction(nameof(Get), new { login = usuario.Login }, usuarioInserido);
+            var usuarioInserido = await manager.InsertAsync(novoUsuario);
+            return CreatedAtAction(nameof(Get), new { login = novoUsuario.Login }, usuarioInserido);
         }
     }
 }

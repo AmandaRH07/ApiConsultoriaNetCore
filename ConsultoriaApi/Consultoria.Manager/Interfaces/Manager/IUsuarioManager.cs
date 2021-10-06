@@ -9,8 +9,8 @@ namespace Consultoria.Manager.Interfaces.Manager
     {
         Task<IEnumerable<UsuarioView>> GetAsync();
         Task<UsuarioView> GetAsync(string login);
-        Task<UsuarioView> InsertAsync(Usuario usuario);
+        Task<UsuarioView> InsertAsync(NovoUsuario novoUsuario);
         Task<UsuarioView> UpdateAsync(Usuario  usuario);
-        Task<bool> ValidaSenhaAsync(Usuario usuario);
+        Task<UsuarioLogado> ValidaUsuarioEGeraTokenAsync(Usuario usuario);
     }
 }

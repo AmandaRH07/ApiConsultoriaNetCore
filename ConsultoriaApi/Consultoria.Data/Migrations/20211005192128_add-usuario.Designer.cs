@@ -4,14 +4,16 @@ using Consultoria.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Consultoria.Data.Migrations
 {
     [DbContext(typeof(ConsultoriaDbContext))]
-    partial class ConsultoriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211005192128_add-usuario")]
+    partial class addusuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,21 +98,6 @@ namespace Consultoria.Data.Migrations
                     b.ToTable("Especialidades");
                 });
 
-            modelBuilder.Entity("Consultoria.Core.Domain.Funcao", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Funcoes");
-                });
-
             modelBuilder.Entity("Consultoria.Core.Domain.Medico", b =>
                 {
                     b.Property<int>("Id")
@@ -170,21 +157,6 @@ namespace Consultoria.Data.Migrations
                     b.ToTable("EspecialidadeMedico");
                 });
 
-            modelBuilder.Entity("FuncaoUsuario", b =>
-                {
-                    b.Property<int>("FuncoesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuariosLogin")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FuncoesId", "UsuariosLogin");
-
-                    b.HasIndex("UsuariosLogin");
-
-                    b.ToTable("FuncaoUsuario");
-                });
-
             modelBuilder.Entity("Consultoria.Core.Domain.Endereco", b =>
                 {
                     b.HasOne("Consultoria.Core.Domain.Cliente", "Cliente")
@@ -218,21 +190,6 @@ namespace Consultoria.Data.Migrations
                     b.HasOne("Consultoria.Core.Domain.Medico", null)
                         .WithMany()
                         .HasForeignKey("MedicosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FuncaoUsuario", b =>
-                {
-                    b.HasOne("Consultoria.Core.Domain.Funcao", null)
-                        .WithMany()
-                        .HasForeignKey("FuncoesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Consultoria.Core.Domain.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosLogin")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

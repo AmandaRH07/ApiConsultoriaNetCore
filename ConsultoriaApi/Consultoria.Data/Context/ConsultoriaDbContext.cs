@@ -1,9 +1,6 @@
 ﻿using Consultoria.Core.Domain;
 using Consultoria.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Consultoria.Data.Context
 {
@@ -14,11 +11,10 @@ namespace Consultoria.Data.Context
         public DbSet<Telefone> Telefones { get; set; }
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Especialidade> Especialidades { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Funcao> Funcoes { get; set; }
 
-        public ConsultoriaDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
+        public ConsultoriaDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +23,7 @@ namespace Consultoria.Data.Context
             modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
             modelBuilder.ApplyConfiguration(new TelefoneConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
     }
 }

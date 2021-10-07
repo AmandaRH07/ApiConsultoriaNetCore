@@ -22,6 +22,8 @@ namespace Consultoria.WebApi
         {
             services.AddControllers();
 
+            services.AddJWTConfiguration(Configuration);
+
             services.AddFluentValidationConfiguration();
 
             services.AddAutoMapperConfiguration();
@@ -50,7 +52,7 @@ namespace Consultoria.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseJWTConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

@@ -81,6 +81,8 @@ namespace Consultoria.WebApi.Controller
                 logger.LogInformation("Foi requisitada a inserção de um novo cliente.");
                 clienteInserido = await clienteManager.InsertClienteAsync(novoCliente);
             }
+            
+            logger.LogInformation("Fim da requisição");
             return CreatedAtAction(nameof(Get), new { id = clienteInserido.Id }, clienteInserido);
         }
 

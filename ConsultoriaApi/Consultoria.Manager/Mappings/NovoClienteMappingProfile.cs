@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Consultoria.Core.Domain;
 using Consultoria.Core.Shared.ModelViews;
+using Consultoria.Core.Shared.ModelViews.Cliente;
 using System;
 
 namespace Consultoria.Manager.Mappings
@@ -15,6 +16,9 @@ namespace Consultoria.Manager.Mappings
 
             CreateMap<NovoEndereco, Endereco>();
             CreateMap<NovoTelefone, Telefone>();
+            CreateMap<Cliente, ClienteView>();
+            CreateMap<Endereco, EnderecoView>();
+            CreateMap<Telefone, TelefoneView>();
         }
     }
 }

@@ -9,7 +9,6 @@ namespace Consultoria.Data.Context
 
         public void Configure(EntityTypeBuilder<Telefone> builder)
         {
-            // definindo chave composta
             builder.HasKey(p => new { p.ClienteId, p.Numero });
         }
     }

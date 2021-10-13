@@ -14,10 +14,14 @@ CRUD de uma API de consultoria médica. Usuários realizam o login e são dividi
     - NSubstitute
 
 ## Features
-    [X] Clientes
-    [X] Médicos
-    [X] Usuário
+[x] Usuários
+[x] Clientes
+[x] Médicos
 
 ## Tecnologia
 - C# 
 - .Net Core 3.1
+
+## Referências
+- Curso (https://www.youtube.com/user/francissasterr/videos)
+- Documentação das tecnologias utilizadas

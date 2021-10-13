@@ -14,9 +14,9 @@ CRUD de uma API de consultoria médica. Usuários realizam o login e são dividi
     - NSubstitute
 
 ## Features
-[x] Usuários
-[x] Clientes
-[x] Médicos
+- Login de Usuários
+- Cadastro de Clientes
+- Cadastro de Médicos
 
 ## Tecnologia
 - C# 
